@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <title>対称ペイントツール</title>
-        <link rel="stylesheet" href="https://sho11decade.github.io/symmetry_draw/style.css">
-        <noscript>
-            <p>JavaScriptが無効になっています。有効にしてください。</p>
-        </noscript>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>対称ペイントツール</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+    <header class="title-bar">
         <h1>対称ペイントツール</h1>
-    </body>
+    </header>
+    <main>
+        <div class="toolbar">
+            <label for="color">色選択:</label>
+            <input type="color" id="color" name="color">
+
+            <label for="pen-size">ペンの太さ:</label>
+            <input type="range" id="pen-size" min="1" max="20" value="5">
+
+            <button id="undo">Undo</button>
+            <button id="redo">Redo</button>
+
+            <label for="symmetry">対称軸の数:</label>
+            <input type="number" id="symmetry" min="1" max="12" value="1">
+
+            <button id="line-symmetry">線対称</button>
+            <button id="point-symmetry">点対称</button>
+
+            <button id="eraser">消しゴムモード</button>
+            <button id="ruler">直線モード</button>
+
+            <label for="gradient">グラデーション:</label>
+            <input type="checkbox" id="gradient">
+        </div>
+
+        <canvas id="paintCanvas" width="800" height="600"></canvas>
+
+        <div class="file-controls">
+            <button id="upload">アップロード</button>
+            <button id="download">ダウンロード</button>
+            <label for="canvas-width">キャンバス幅:</label>
+            <input type="number" id="canvas-width" min="100" max="2000" value="800">
+            <label for="canvas-height">キャンバス高さ:</label>
+            <input type="number" id="canvas-height" min="100" max="2000" value="600">
+            <button id="clear">クリア</button>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
