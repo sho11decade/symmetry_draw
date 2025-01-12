@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>対称ペイントツール</title>
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js').then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, err => {
+            console.log('ServiceWorker registration failed: ', err);
+            }).catch(err => {
+            console.log(err)
+            });
+            });
+        }
+        </script>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" href="./image/favicon.ico">
+    <link rel="apple-touch-icon" href="./image/apple-touch-icon.png">
 </head>
 <body>
     <header class="title-bar">
@@ -24,7 +38,7 @@
             <button id="redo">Redo</button>
 
             <label for="symmetry">対称軸の数:</label>
-            <input type="number" id="symmetry" min="1" max="12" value="1">
+            <input type="number" id="symmetry" min="1" max="12" value="4">
 
             <button id="line-symmetry">線対称</button>
             <button id="point-symmetry">点対称</button>
