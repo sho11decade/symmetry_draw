@@ -4,15 +4,6 @@ const uploadButton = document.getElementById('upload');
 const gradientCheckbox = document.getElementById('gradient');
 let hue = 0;
 
-const eraserCheckbox = document.getElementById('eraser');
-
-eraserCheckbox.addEventListener('change', () => {
-    if (eraserCheckbox.checked) {
-        currentColor = '#FFFFFF'; // Assuming white background for eraser
-    } else {
-        currentColor = colorPicker.value; // Revert to selected color
-    }
-});
 function updateColor() {
     if (gradientCheckbox.checked) {
         currentColor = `hsl(${hue}, 100%, 50%)`;

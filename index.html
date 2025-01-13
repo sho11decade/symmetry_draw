@@ -32,7 +32,7 @@
             <input type="color" id="color" name="color">
 
             <label for="pen-size">ペンの太さ:</label>
-            <input type="range" id="pen-size" min="0.1" max="20" value="5">
+            <input type="range" class="pen-size" id="pen-size" min="0.1" max="20" value="5">
 
             <button id="undo">Undo</button>
             <button id="redo">Redo</button>
@@ -42,10 +42,14 @@
 
             <button id="line-symmetry">線対称</button>
             <button id="point-symmetry">点対称</button>
-            <label for="eraser">消しゴム:</label>
-            <input type="checkbox" id="eraser">
-            <label for="gradient">グラデーション:</label>
-            <input type="checkbox" id="gradient">
+            <div class="switch-container">
+                <span class="switch-label">グラデーション:</span>
+                <label class="switch">
+                  <input type="checkbox" id="gradient">
+                  <span class="slider round"></span>
+                </label>
+            </div>
+
         </div>
 
         <canvas id="paintCanvas" width="800" height="600"></canvas>
