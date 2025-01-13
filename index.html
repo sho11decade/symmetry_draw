@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>対称ペイントツール</title>
+    <title>対称描画ツール</title>
+    <meta name=”description” content=”線対称や点対称を使って美しい模様が描けるシンプルなドローツールです。HTML5のCanvasを使って描画します。機能:点対称モード, 線対称モード, フリーハンド・直線, PWAに対応しネイティブアプリのように使用できます。”>
     <link rel="manifest" href="manifest.json">
     <script>
         if ('serviceWorker' in navigator) {
@@ -18,13 +19,23 @@
             });
         }
         </script>
+        <script type="application/ld+json">
+            {
+                   "@context": "http://schema.org",
+                   "@id": "https://seopack.jp/#organization",
+                   "@type": "WebSite",
+                   "name": "対称描画ツール",
+                   "alternateName": ["対称 描画ツール", "Symmetry Draw Tool", "symmetry draw tool", "symmetry paint"],
+                   "url": "https://sho11decade.github.io/symmetry_draw/",
+                   }
+           </script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="./image/favicon.ico">
     <link rel="apple-touch-icon" href="./image/apple-touch-icon.png">
 </head>
 <body>
     <header class="title-bar">
-        <h1>対称ペイントツール</h1>
+        <h1>対称描画ツール</h1>
     </header>
     <main>
         <div class="toolbar">
