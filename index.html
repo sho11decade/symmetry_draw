@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>対称描画ツール</title>
-    <meta name=”description” content=”線対称や点対称を使って美しい模様が描けるシンプルなドローツールです。HTML5のCanvasを使って描画します。機能:点対称モード, 線対称モード, フリーハンド・直線, PWAに対応しネイティブアプリのように使用できます。”>
+    <meta name=”description” content=”線対称や点対称を使って美しい模様が描けるシンプルなドローツールです。HTML5のCanvasを使って描画します。機能:点対称モード, 線対称モード,
+        フリーハンド・直線, PWAに対応しネイティブアプリのように使用できます。”>
     <link rel="manifest" href="manifest.json">
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js').then(registration => {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            }, err => {
-            console.log('ServiceWorker registration failed: ', err);
-            }).catch(err => {
-            console.log(err)
-            });
+                navigator.serviceWorker.register('sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                }).catch(err => {
+                    console.log(err)
+                });
             });
         }
-        </script>
-        <script type="application/ld+json">
+    </script>
+    <script type="application/ld+json">
             {
                    "@context": "http://schema.org",
                    "@id": "https://seopack.jp/#organization",
@@ -33,6 +35,7 @@
     <link rel="icon" href="./image/favicon.ico">
     <link rel="apple-touch-icon" href="./image/apple-touch-icon.png">
 </head>
+
 <body>
     <header class="title-bar">
         <h1>対称描画ツール</h1>
@@ -51,13 +54,36 @@
             <label for="symmetry">対称軸の数:</label>
             <input type="number" id="symmetry" min="1" max="12" value="3">
 
-            <button id="line-symmetry">線対称</button>
-            <button id="point-symmetry">点対称</button>
+            <div class="radio-button-container">
+                <div class="contents">
+                    <span class="radio-label">描画モード:</span>
+                    <div class="radio-buttons">
+                        <input id="line-symmetry" type="radio" name="draw-mode" value="line-symmetry" checked>
+                        <label for="line-symmetry">線対称</label>
+                    </div>
+                    <div class="radio-buttons">
+                        <input id="point-symmetry" type="radio" name="draw-mode" value="point-symmetry">
+                        <label for="point-symmetry">点対称</label>
+                    </div>
+                    <div class="radio-buttons">
+                        <input id="geometry1" type="radio" name="draw-mode" value="geometry1">
+                        <label for="geometry1">幾何学1</label>
+                    </div>
+                    <div class="radio-buttons">
+                        <input id="geometry2" type="radio" name="draw-mode" value="geometry2">
+                        <label for="geometry2">幾何学2</label>
+                    </div>
+                    <div class="radio-buttons">
+                        <input id="eraser" type="radio" name="draw-mode" value="eraser">
+                        <label for="eraser">消しゴム</label>
+                    </div>
+                </div>
+            </div>
             <div class="switch-container">
                 <span class="switch-label">グラデーション:</span>
                 <label class="switch">
-                  <input type="checkbox" id="gradient">
-                  <span class="slider round"></span>
+                    <input type="checkbox" id="gradient">
+                    <span class="slider round"></span>
                 </label>
             </div>
 
@@ -74,8 +100,10 @@
             <input type="number" id="canvas-height" min="100" max="2000" value="600">
             <button id="clear">クリア</button>
         </div>
-        <small>Copyright © 2025 source21 All Rights Reserved.</small><a href="https://github.com/sho11decade/symmetry_draw">View on GitHub</a>
+        <small>Copyright © 2025 source21 All Rights Reserved.</small><a
+            href="https://github.com/sho11decade/symmetry_draw">View on GitHub</a>
     </main>
     <script src="script.js"></script>
 </body>
+
 </html>

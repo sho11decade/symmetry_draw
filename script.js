@@ -74,14 +74,12 @@ const ctx = canvas.getContext('2d');
 let drawing = false;
 let currentColor = '#000000';
 let penSize = 5;
-let symmetry = 1;
-let isLineSymmetry = false;
-let isPointSymmetry = false;
+let symmetry = 3;
+let drawMode = 'line-symmetry';
 let lastX = null;
 let lastY = null;
 let undoStack = [];
 let redoStack = [];
-
 // Resize canvas to fit window
 canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
@@ -99,8 +97,22 @@ const symmetryInput = document.getElementById('symmetry');
 const undoButton = document.getElementById('undo');
 const redoButton = document.getElementById('redo');
 const clearButton = document.getElementById('clear'); // New clear button
-const lineSymmetryButton = document.getElementById('line-symmetry');
-const pointSymmetryButton = document.getElementById('point-symmetry');
+let drawmode = document.getElementsByName('draw-mode');
+let len = drawmode.length;
+console.log(drawmode);
+console.log(len);
+function update_drawmode() {
+    for (let i = 0; i < len; i++){
+        if (drawmode[i].checked){
+            drawMode = drawmode[i].value;
+            break;
+        }
+    console.log(drawMode);
+    }
+}
+drawmode.forEach((radio) => {
+    radio.addEventListener('change', update_drawmode);
+});
 
 colorPicker.addEventListener('input', (e) => {
     currentColor = e.target.value;
@@ -118,15 +130,7 @@ undoButton.addEventListener('click', undo);
 redoButton.addEventListener('click', redo);
 clearButton.addEventListener('click', clearCanvas); // Attach clear function to button
 
-lineSymmetryButton.addEventListener('click', () => {
-    isLineSymmetry = !isLineSymmetry;
-    isPointSymmetry = false;
-});
 
-pointSymmetryButton.addEventListener('click', () => {
-    isPointSymmetry = !isPointSymmetry;
-    isLineSymmetry = false;
-});
 
 function startDrawing(e) {
     drawing = true;
@@ -135,7 +139,21 @@ function startDrawing(e) {
     lastX = e.clientX - rect.left;
     lastY = e.clientY - rect.top;
 }
+function eraseLine(x, y) {
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.lineWidth = penSize;
+    ctx.lineCap = 'round';
 
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.closePath();
+
+    ctx.globalCompositeOperation = 'source-over';
+    lastX = x;
+    lastY = y;
+}
 function stopDrawing() {
     drawing = false;
     lastX = null;
@@ -149,19 +167,51 @@ function draw(e) {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
-    if (isLineSymmetry) {
+    if (drawMode === 'line-symmetry') {
         drawLineSymmetry(x, y);
-    } else if (isPointSymmetry) {
+    }
+    else if (drawMode === 'point-symmetry') {
         drawPointSymmetry(x, y);
-    } else {
+    }
+    else if (drawMode === 'geometry1') {
         drawSymmetry(x, y);
+    }
+    else if (drawMode === 'geometry2') {
+        drawnewSymmetry(x, y);
+    }
+    else if (drawMode === 'eraser') {
+        eraseLine(x, y);
     }
 
     lastX = x;
     lastY = y;
 }
+function drawGeometricPattern(x, y) {
+    for (let i = 0; i < symmetry; i++) {
+        const angle = (i * 2 * Math.PI) / symmetry;
+        const symX = Math.cos(angle) * (x - canvas.width / 2) - Math.sin(angle) * (y - canvas.height / 2) + canvas.width / 2;
+        const symY = Math.sin(angle) * (x - canvas.width / 2) + Math.cos(angle) * (y - canvas.height / 2) + canvas.height / 2;
 
+        drawLine(lastX, lastY, symX, symY);
+    }
+    drawLine(lastX, lastY, x, y);
+}
+function drawnewSymmetry(x, y) {
+    for (let i = 0; i < symmetry; i++) {
+        const angle = (i * 2 * Math.PI) / symmetry;
+        const symX = Math.cos(angle) * (x - canvas.width / 2) - Math.sin(angle) * (y - canvas.height / 2) + canvas.width / 2;
+        const symY = Math.sin(angle) * (x - canvas.width / 2) + Math.cos(angle) * (y - canvas.height / 2) + canvas.height / 2;
+
+        drawLine(lastX, lastY, symX, symY);
+        drawLine(canvas.width - lastX, lastY, canvas.width - symX, symY);
+        drawLine(lastX, canvas.height - lastY, symX, canvas.height - symY);
+        drawLine(canvas.width - lastX, canvas.height - lastY, canvas.width - symX, canvas.height - symY);
+    }
+    drawLine(lastX, lastY, x, y);
+    drawLine(canvas.width - lastX, lastY, canvas.width - x, y);
+    drawLine(lastX, canvas.height - lastY, x, canvas.height - y);
+    drawLine(canvas.width - lastX, canvas.height - lastY, canvas.width - x, canvas.height - y);
+}
 function drawSymmetry(x, y) {
     for (let i = 0; i < symmetry; i++) {
         const angle = (i * 2 * Math.PI) / symmetry;
