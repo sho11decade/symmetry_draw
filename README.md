@@ -1,5 +1,5 @@
 # 対称描画ツール
-![gif](https://github.com/sho11decade/symmetry_draw/blob/main/image/ex.gif)
+![gif](https://github.com/sho11decade/symmetry_draw/blob/main/image/ex2.gif)
 ## Overview
 対称な模様を描画できるWebアプリ。
 A web app that allows you to draw symmetrical shapes.
