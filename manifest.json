@@ -4,7 +4,8 @@
 	"theme_color": "#2196f3",
 	"background_color": "#2196f3",
 	"display": "standalone",
-	"start_url": "index.html",
+	"start_url": "https://sho11decade.github.io/symmetry_draw/",
+	"scope": "https://sho11decade.github.io/symmetry_draw/",
 	"icons": [
 		{
 		  "src": "image/icon-72x72.png",
