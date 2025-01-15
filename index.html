@@ -9,17 +9,28 @@
         フリーハンド・直線, PWAに対応しネイティブアプリのように使用できます。”>
     <link rel="manifest" href="manifest.json">
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').then(registration => {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, err => {
-                    console.log('ServiceWorker registration failed: ', err);
-                }).catch(err => {
-                    console.log(err)
-                });
-            });
-        }
+        // ServiceWorkerを読み込ませる
+        window.addEventListener('load', function () {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function (registration) {
+                        return registration.pushManager.getSubscription().then(function (subscription) {
+                            console.log("subscription", subscription)
+                            if (subscription) {
+                                return subscription
+                            }
+                            return registration.pushManager.subscribe({
+                                userVisibleOnly: true
+                            })
+                        })
+                    }).then(function (subscription) {
+                        var endpoint = subscription.endpoint
+                        console.log("pushManager endpoint:", endpoint)
+                    }).catch(function (error) {
+                        console.log("serviceWorker error:", error)
+                    })
+            }
+        })
     </script>
     <script type="application/ld+json">
             {
@@ -30,7 +41,7 @@
                    "alternateName": ["対称 描画ツール", "Symmetry Draw Tool", "symmetry draw tool", "symmetry paint"],
                    "url": "https://sho11decade.github.io/symmetry_draw/",
                    }
-           </script>
+    </script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="./image/favicon.ico">
     <link rel="apple-touch-icon" href="./image/apple-touch-icon.png">
@@ -95,9 +106,9 @@
             <button id="upload">アップロード</button>
             <button id="download">ダウンロード</button>
             <label for="canvas-width">キャンバス幅:</label>
-            <input type="number" class="text" id="canvas-width" min="100" max="2000" value="800"  data-format="$1 px">
+            <input type="number" class="text" id="canvas-width" min="100" max="2000" value="800" data-format="$1 px">
             <label for="canvas-height">キャンバス高さ:</label>
-            <input type="number" class="text" id="canvas-height" min="100" max="2000" value="600"  data-format="$1 px">
+            <input type="number" class="text" id="canvas-height" min="100" max="2000" value="600" data-format="$1 px">
             <button id="clear">クリア</button>
         </div>
         <small>Copyright © 2025 source21 All Rights Reserved.</small><a
