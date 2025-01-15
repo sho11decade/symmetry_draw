@@ -1,5 +1,4 @@
 body {
-    width: 100%;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -8,33 +7,21 @@ body {
 }
 
 .title-bar {
-    width: 100%;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    margin: 0;
-    padding: 1rem 0;
     position: relative;
+    padding: 0.1rem .5rem;
+}
+
+.title-bar:after {
+    position: absolute;
+    bottom: 0;
     left: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-}
-
-.title-bar:hover {
-    background-color: #444;
-}
-
-@media (max-width: 768px) {
-    .title-bar {
-        padding: 0.5rem 0;
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .title-bar {
-        font-size: 1rem;
-    }
+    width: 100%;
+    height: 6px;
+    content: '';
+    border-radius: 3px;
+    background-image: -webkit-gradient(linear, right top, left top, from(#2af598), to(#009efd));
+    background-image: -webkit-linear-gradient(right, #2af598 0%, #009efd 100%);
+    background-image: linear-gradient(to left, #2af598 0%, #009efd 100%);
 }
 
 main {
@@ -50,13 +37,13 @@ main {
 }
 
 main {
-    display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: 0rem;
 }
 
 .toolbar {
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -68,7 +55,7 @@ main {
 }
 
 .toolbar label {
-    margin-right: 0.5rem;
+    margin-right: 0rem;
 }
 
 #paintCanvas {
@@ -100,24 +87,6 @@ input[type="color"],
 input[type="range"],
 input[type="number"] {
     margin-left: 0.5rem;
-}
-
-/* Responsive adjustments for smartphones */
-@media (max-width: 600px) {
-    .toolbar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    button {
-        width: 100%;
-        margin-bottom: 0.5rem;
-    }
-
-    .file-controls {
-        width: 100%;
-        text-align: center;
-    }
 }
 
 a {
@@ -203,37 +172,58 @@ input:checked+.slider:before {
     color: #404040;
     font-size: 16px;
     font-weight: bold;
+
     .radio-button-label {
-      margin-bottom: 9px;
+        margin-bottom: 9px;
     }
+
     .radio-label {
         font-size: 16px;
     }
+
     .contents {
-      display: flex;
-      align-items: center;
-      span {
-        font-size: 14px;
-        padding-right: 6px;
-      }
-      .radio-buttons {
-        display: inline-flex;
-        justify-content: space-between;
-        height: 25.5px;
-        margin: 0;
-        padding: 0;
-        label {
-          padding: 0 3px;
-          margin: 0 6px;
-          cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        span {
+            font-size: 14px;
+            padding-right: 6px;
         }
-        input[type=radio] {
-          display: none;
-          &:checked + label {
-            border-bottom: 3px solid #2196F3;
-          }
+
+        .radio-buttons {
+            display: inline-flex;
+            justify-content: space-between;
+            height: 25.5px;
+            margin: 0;
+            padding: 0;
+
+            label {
+                padding: 0 3px;
+                margin: 0 6px;
+                cursor: pointer;
+            }
+
+            input[type=radio] {
+                display: none;
+
+                &:checked+label {
+                    border-bottom: 3px solid #2196F3;
+                }
+            }
         }
-      }
     }
-  }
-  
+}
+
+.text {
+    border: none;
+    border-radius: 5px;
+    border: 1px solid #969da3;
+    background: #f7f7f7;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.text::placeholder {
+    color: #cccccc;
+}
