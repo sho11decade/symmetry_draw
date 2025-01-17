@@ -4,8 +4,8 @@ var DISP_VERSION = 'ca-d-v1';
 
 // キャッシュの対象にするディレクトリ（css/jsは個別で追加）
 var resources = [
-  '/',
-  '/image'
+  '/symmetry_draw/',
+  '/symmetry_draw/image/',
 ];
 
 // キャッシュ追加
