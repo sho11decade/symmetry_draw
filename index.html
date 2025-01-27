@@ -9,9 +9,9 @@
     <link rel="manifest" href="manifest.json">
     <script>
         // ServiceWorkerを読み込ませる
-        window.addEventListener('load', function () {
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('https://sho11decade.github.io/symmetry_draw/sw.js')
+        window.addEventListener("load", function () {
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("https://sho11decade.github.io/symmetry_draw/sw.js")
                     .then(function (registration) {
                         return registration.pushManager.getSubscription().then(function (subscription) {
                             console.log("subscription", subscription)

@@ -1,27 +1,27 @@
 // バージョン定義
-var CACHE_VERSION = 'ca-v1';
-var DISP_VERSION = 'ca-d-v1';
+var CACHE_VERSION = "ca-v1";
+var DISP_VERSION = "ca-d-v1";
 
 // キャッシュの対象にするディレクトリ（css/jsは個別で追加）
 var resources = [
-  '/symmetry_draw/',
-  '/symmetry_draw/image/',
+  "/symmetry_draw/",
+  "/symmetry_draw/image/",
 ];
 
 // キャッシュ追加
-self.addEventListener('install', function (event) {
-  console.log('ServiceWorker Install');
+self.addEventListener("install", function (event) {
+  console.log("ServiceWorker Install");
   event.waitUntil(
     caches.open(CACHE_VERSION)
       .then(function (cache) {
-        console.log('cache.addAll');
+        console.log("cache.addAll");
         cache.addAll(resources);
       })
   );
 });
 // キャッシュ表示
-self.addEventListener('fetch', function (event) {
-  console.log('ServiceWorker fetch');
+self.addEventListener("fetch", function (event) {
+  console.log("ServiceWorker fetch");
   event.respondWith(
     // キャッシュが存在するかチェック
     caches.match(event.request)
@@ -34,7 +34,7 @@ self.addEventListener('fetch', function (event) {
             .then(function (res) {
               return caches.open(DISP_VERSION)
                 .then(function (cache) {
-                  console.log('cache.put');
+                  console.log("cache.put");
                   cache.put(event.request.url, res.clone());
                   return res;
                 });
@@ -47,14 +47,14 @@ self.addEventListener('fetch', function (event) {
   );
 });
 // 古いキャッシュを削除
-self.addEventListener('activate', function (event) {
-  console.log('activate ServiceWorker');
+self.addEventListener("activate", function (event) {
+  console.log("activate ServiceWorker");
   event.waitUntil(
     caches.keys()
       .then(function (keyList) {
         return Promise.all(keyList.map(function (key) {
           if (key !== CACHE_VERSION && key !== DISP_VERSION) {
-            console.log('cache.delete');
+            console.log("cache.delete");
             return caches.delete(key);
           }
         }));

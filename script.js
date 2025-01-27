@@ -1,7 +1,7 @@
-const canvas = document.getElementById('paintCanvas');
-const downloadButton = document.getElementById('download');
-const uploadButton = document.getElementById('upload');
-const gradientCheckbox = document.getElementById('gradient');
+const canvas = document.getElementById("paintCanvas");
+const downloadButton = document.getElementById("download");
+const uploadButton = document.getElementById("upload");
+const gradientCheckbox = document.getElementById("gradient");
 let hue = 0;
 
 function updateColor() {
@@ -13,16 +13,36 @@ function updateColor() {
         //cosole.log(rgb);
     }
 }
+canvas.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    startDrawing(touch);
+});
 
-canvas.addEventListener('mousemove', () => {
+canvas.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    stopDrawing();
+});
+
+canvas.addEventListener("touchcancel", (e) => {
+    e.preventDefault();
+    stopDrawing();
+});
+
+canvas.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    draw(touch);
+});
+canvas.addEventListener("mousemove", () => {
     if (drawing) {
         updateColor();
     }
 });
-uploadButton.addEventListener('click', () => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
+uploadButton.addEventListener("click", () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
     input.onchange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -42,18 +62,18 @@ uploadButton.addEventListener('click', () => {
     input.click();
 });
 
-downloadButton.addEventListener('click', () => {
-    const link = document.createElement('a');
-    link.download = 'canvas_image.png';
+downloadButton.addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.download = "canvas_image.png";
     link.href = canvas.toDataURL();
     link.click();
 });
 
-const resizeButton = document.getElementById('resize');
-const canvasWidthInput = document.getElementById('canvas-width');
-const canvasHeightInput = document.getElementById('canvas-height');
+const resizeButton = document.getElementById("resize");
+const canvasWidthInput = document.getElementById("canvas-width");
+const canvasHeightInput = document.getElementById("canvas-height");
 
-canvasWidthInput.addEventListener('input', () => {
+canvasWidthInput.addEventListener("input", () => {
     const newWidth = parseInt(canvasWidthInput.value);
     if (!isNaN(newWidth) && newWidth > 0) {
         canvas.width = newWidth;
@@ -61,21 +81,21 @@ canvasWidthInput.addEventListener('input', () => {
     }
 });
 
-canvasHeightInput.addEventListener('input', () => {
+canvasHeightInput.addEventListener("input", () => {
     const newHeight = parseInt(canvasHeightInput.value);
     if (!isNaN(newHeight) && newHeight > 0) {
         canvas.height = newHeight;
         clearCanvas();
     }
 });
-const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext("2d");
 
 // Default settings
 let drawing = false;
-let currentColor = '#000000';
+let currentColor = "#000000";
 let penSize = 5;
 let symmetry = 3;
-let drawMode = 'line-symmetry';
+let drawMode = "line-symmetry";
 let lastX = null;
 let lastY = null;
 let undoStack = [];
@@ -85,19 +105,19 @@ canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
 
 // Event listeners for drawing
-canvas.addEventListener('mousedown', startDrawing);
-canvas.addEventListener('mouseup', stopDrawing);
-canvas.addEventListener('mouseout', stopDrawing);
-canvas.addEventListener('mousemove', draw);
+canvas.addEventListener("mousedown", startDrawing);
+canvas.addEventListener("mouseup", stopDrawing);
+canvas.addEventListener("mouseout", stopDrawing);
+canvas.addEventListener("mousemove", draw);
 
 // Tools and settings
-const colorPicker = document.getElementById('color');
-const penSizeInput = document.getElementById('pen-size');
-const symmetryInput = document.getElementById('symmetry');
-const undoButton = document.getElementById('undo');
-const redoButton = document.getElementById('redo');
-const clearButton = document.getElementById('clear'); // New clear button
-let drawmode = document.getElementsByName('draw-mode');
+const colorPicker = document.getElementById("color");
+const penSizeInput = document.getElementById("pen-size");
+const symmetryInput = document.getElementById("symmetry");
+const undoButton = document.getElementById("undo");
+const redoButton = document.getElementById("redo");
+const clearButton = document.getElementById("clear"); // New clear button
+let drawmode = document.getElementsByName("draw-mode");
 let len = drawmode.length;
 console.log(drawmode);
 console.log(len);
@@ -111,24 +131,24 @@ function update_drawmode() {
     }
 }
 drawmode.forEach((radio) => {
-    radio.addEventListener('change', update_drawmode);
+    radio.addEventListener("change", update_drawmode);
 });
 
-colorPicker.addEventListener('input', (e) => {
+colorPicker.addEventListener("input", (e) => {
     currentColor = e.target.value;
 });
 
-penSizeInput.addEventListener('input', (e) => {
+penSizeInput.addEventListener("input", (e) => {
     penSize = e.target.value;
 });
 
-symmetryInput.addEventListener('input', (e) => {
+symmetryInput.addEventListener("input", (e) => {
     symmetry = e.target.value;
 });
 
-undoButton.addEventListener('click', undo);
-redoButton.addEventListener('click', redo);
-clearButton.addEventListener('click', clearCanvas); // Attach clear function to button
+undoButton.addEventListener("click", undo);
+redoButton.addEventListener("click", redo);
+clearButton.addEventListener("click", clearCanvas); // Attach clear function to button
 
 
 
@@ -140,9 +160,9 @@ function startDrawing(e) {
     lastY = e.clientY - rect.top;
 }
 function eraseLine(x, y) {
-    ctx.globalCompositeOperation = 'destination-out';
+    ctx.globalCompositeOperation = "destination-out";
     ctx.lineWidth = penSize;
-    ctx.lineCap = 'round';
+    ctx.lineCap = "round";
 
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
@@ -150,7 +170,7 @@ function eraseLine(x, y) {
     ctx.stroke();
     ctx.closePath();
 
-    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalCompositeOperation = "source-over";
     lastX = x;
     lastY = y;
 }
@@ -167,19 +187,19 @@ function draw(e) {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    if (drawMode === 'line-symmetry') {
+    if (drawMode === "line-symmetry") {
         drawLineSymmetry(x, y);
     }
-    else if (drawMode === 'point-symmetry') {
+    else if (drawMode === "point-symmetry") {
         drawPointSymmetry(x, y);
     }
-    else if (drawMode === 'geometry1') {
+    else if (drawMode === "geometry1") {
         drawSymmetry(x, y);
     }
-    else if (drawMode === 'geometry2') {
+    else if (drawMode === "geometry2") {
         drawnewSymmetry(x, y);
     }
-    else if (drawMode === 'eraser') {
+    else if (drawMode === "eraser") {
         eraseLine(x, y);
     }
 
@@ -245,7 +265,7 @@ function drawLine(x1, y1, x2, y2) {
     if (x1 === null || y1 === null) return;
 
     ctx.lineWidth = penSize;
-    ctx.lineCap = 'round';
+    ctx.lineCap = "round";
     ctx.strokeStyle = currentColor;
 
     ctx.beginPath();
