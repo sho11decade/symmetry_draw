@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 
 <head>
     <!-- Google tag (gtag.js) -->
@@ -13,13 +13,14 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>幾何学模様ツール</title>
-    <meta name=”description”
-        content=”幾何学的で、美しい模様が描けるシンプルなドローツールです。HTML5のCanvasを使って描画します。PWAに対応し,ネイティブアプリのように使用できます。独自のデザインを楽しもう。”>
+    <title>Geometric drawing tools</title>
+    <meta name=”description” content=”A simple drawing tool that allows you to draw geometric and beautiful patterns.
+        Draw using HTML5 Canvas. Supports PWA and can be used like a native app. Enjoy creating your own unique
+        designs.”>
     <link rel="manifest" href="manifest.json">
     <script>
         ////////////////////////////
-        //PWA用のスクリプト
+        //Script for PWA
         window.addEventListener("load", function () {
             if ("serviceWorker" in navigator) {
                 navigator.serviceWorker.register("https://sho11decade.github.io/symmetry_draw/sw.js")
@@ -48,62 +49,61 @@
                    "@context": "http://schema.org",
                    "@id": "https://seopack.jp/#organization",
                    "@type": "WebSite",
-                   "name": "幾何学模様描画ツール",
-                   "alternateName": ["幾何学模様 描画ツール", "Geometric Patterns Draw Tool", "geometric patterns draw tool", "Geometric patterns paint"],
+                   "name": "Geometric drawing tools",
+                   "alternateName": ["Geometric drawing tools", "Geometric Patterns Draw Tool", "geometric patterns draw tool", "Geometric patterns paint"],
                    "url": "https://sho11decade.github.io/symmetry_draw/"
                    }
     </script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="./image/favicon.ico">
     <link rel="apple-touch-icon" href="./image/apple-touch-icon.png">
-    <script src="./r.js"></script>
 </head>
 
 <body>
     <header class="title-bar">
-        <h1>幾何学模様描画ツール</h1>
+        <h1>Geometric drawing tools</h1>
     </header>
     <main>
         <div class="toolbar">
-            <label for="color">色選択:</label>
+            <label for="color">Color Selection:</label>
             <input type="color" id="color" name="color">
 
-            <label for="pen-size">ペンの太さ:</label>
+            <label for="pen-size">Pen thickness:</label>
             <input type="range" class="pen-size" id="pen-size" min="0.1" max="50" value="3">
 
             <button id="undo">Undo</button>
             <button id="redo">Redo</button>
 
-            <label for="symmetry">対称軸の数:</label>
+            <label for="symmetry">Number of axes of symmetry:</label>
             <input type="number" class="text" id="symmetry" min="1" max="12" value="3">
 
             <div class="radio-button-container">
                 <div class="contents">
-                    <span class="radio-label">描画モード:</span>
+                    <span class="radio-label">Draw mode:</span>
                     <div class="radio-buttons">
                         <input id="line-symmetry" type="radio" name="draw-mode" value="line-symmetry" checked>
-                        <label for="line-symmetry">線対称</label>
+                        <label for="line-symmetry">Line symmetry</label>
                     </div>
                     <div class="radio-buttons">
                         <input id="point-symmetry" type="radio" name="draw-mode" value="point-symmetry">
-                        <label for="point-symmetry">点対称</label>
+                        <label for="point-symmetry">Point symmetry</label>
                     </div>
                     <div class="radio-buttons">
                         <input id="geometry1" type="radio" name="draw-mode" value="geometry1">
-                        <label for="geometry1">幾何学1</label>
+                        <label for="geometry1">Geometry 1</label>
                     </div>
                     <div class="radio-buttons">
                         <input id="geometry2" type="radio" name="draw-mode" value="geometry2">
-                        <label for="geometry2">幾何学2</label>
+                        <label for="geometry2">Geometry 2</label>
                     </div>
                     <div class="radio-buttons">
                         <input id="eraser" type="radio" name="draw-mode" value="eraser">
-                        <label for="eraser">消しゴム</label>
+                        <label for="eraser">Eraser</label>
                     </div>
                 </div>
             </div>
             <div class="switch-container">
-                <span class="switch-label">グラデーション:</span>
+                <span class="switch-label">Gradation:</span>
                 <label class="switch">
                     <input type="checkbox" id="gradient">
                     <span class="slider round"></span>
@@ -115,13 +115,13 @@
         <canvas id="paintCanvas" width="800" height="600"></canvas>
 
         <div class="file-controls">
-            <button id="upload">アップロード</button>
-            <button id="download">ダウンロード</button>
-            <label for="canvas-width">キャンバス幅:</label>
+            <button id="upload">Upload</button>
+            <button id="download">Download</button>
+            <label for="canvas-width">Canvas Width:</label>
             <input type="number" class="text" id="canvas-width" min="100" max="2000" value="800" data-format="$1 px">
-            <label for="canvas-height">キャンバス高さ:</label>
+            <label for="canvas-height">Canvas Height:</label>
             <input type="number" class="text" id="canvas-height" min="100" max="2000" value="600" data-format="$1 px">
-            <button id="clear">クリア</button>
+            <button id="clear">Clear</button>
         </div>
         <small>Copyright © 2025 source21 All Rights Reserved.</small><a
             href="https://github.com/sho11decade/symmetry_draw">View on GitHub</a>
