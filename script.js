@@ -17,6 +17,7 @@ canvas.addEventListener("touchstart", (e) => {
     e.preventDefault();
     const touch = e.touches[0];
     startDrawing(touch);
+    
 });
 
 canvas.addEventListener("touchend", (e) => {
@@ -30,6 +31,9 @@ canvas.addEventListener("touchcancel", (e) => {
 });
 
 canvas.addEventListener("touchmove", (e) => {
+    if (drawing) {
+        updateColor();
+    }
     e.preventDefault();
     const touch = e.touches[0];
     draw(touch);
