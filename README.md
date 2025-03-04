@@ -1,8 +1,8 @@
-# 対称描画ツール
+# 幾何学模様描画ツール
 ![gif](https://github.com/sho11decade/symmetry_draw/blob/main/image/ex2.gif)
 ## Overview
-対称な模様を描画できるWebアプリ。
-A web app that allows you to draw symmetrical shapes.
+幾何学模様を描画できるWebアプリ。
+A web app that allows you to draw Geometric shapes.
 ## Requirement
 - Modan Browser example: Chrome, Firefox, Safari (IE is not supported)
 ## Usage

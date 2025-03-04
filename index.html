@@ -13,12 +13,13 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>対称描画ツール</title>
+    <title>幾何学模様ツール</title>
     <meta name=”description”
-        content=”線対称や点対称を使って美しい模様が描けるシンプルなドローツールです。HTML5のCanvasを使って描画します。PWAに対応し,ネイティブアプリのように使用できます。独自のデザインを楽しもう。”>
+        content=”幾何学的で、美しい模様が描けるシンプルなドローツールです。HTML5のCanvasを使って描画します。PWAに対応し,ネイティブアプリのように使用できます。独自のデザインを楽しもう。”>
     <link rel="manifest" href="manifest.json">
     <script>
-        // ServiceWorkerを読み込ませる
+        ////////////////////////////
+        //PWA用のスクリプト
         window.addEventListener("load", function () {
             if ("serviceWorker" in navigator) {
                 navigator.serviceWorker.register("https://sho11decade.github.io/symmetry_draw/sw.js")
@@ -40,14 +41,15 @@
                     })
             }
         })
+        ////////////////////////////
     </script>
     <script type="application/ld+json">
             {
                    "@context": "http://schema.org",
                    "@id": "https://seopack.jp/#organization",
                    "@type": "WebSite",
-                   "name": "対称描画ツール",
-                   "alternateName": ["対称 描画ツール", "Symmetry Draw Tool", "symmetry draw tool", "symmetry paint"],
+                   "name": "幾何学模様描画ツール",
+                   "alternateName": ["幾何学模様 描画ツール", "Geometric Patterns Draw Tool", "geometric patterns draw tool", "Geometric patterns paint"],
                    "url": "https://sho11decade.github.io/symmetry_draw/"
                    }
     </script>
@@ -58,7 +60,7 @@
 
 <body>
     <header class="title-bar">
-        <h1>対称描画ツール</h1>
+        <h1>幾何学模様描画ツール</h1>
     </header>
     <main>
         <div class="toolbar">
