@@ -101,7 +101,7 @@ function updateColor() {
     if (gradientCheckbox.checked) {
         currentColor = `hsl(${hue}, 100%, 50%)`;
         hue = (hue + 1) % 360;
-        console.log(hue, currentColor);
+        //console.log(hue, currentColor);
         //rgb = hslToRgb10(hue, 100, 50);
         //cosole.log(rgb);
     }
