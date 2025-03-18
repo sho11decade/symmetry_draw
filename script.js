@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//MIT License. Copyright (c) 2025 source21
+// MIT License. Copyright (c) 2025 source21
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const colorPicker = document.getElementById("color");
@@ -18,12 +18,12 @@ const gradientCheckbox = document.getElementById("gradient");
 const resizeButton = document.getElementById("resize");
 const canvasWidthInput = document.getElementById("canvas-width");
 const canvasHeightInput = document.getElementById("canvas-height");
-//DOM settings
+// DOM settings
 
 const ctx = canvas.getContext("2d");
 canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
-//Canvas settings
+// Canvas settings
 
 let hue = 0;
 let drawing = false;
@@ -77,8 +77,12 @@ canvas.addEventListener("mousemove", () => {
 });
 uploadButton.addEventListener("click", () => {
 });
+uploadButton.addEventListener("touchend", () => {
+});
 
 downloadButton.addEventListener("click", () => {
+});
+downloadButton.addEventListener("touchend", () => {
 });
 canvasWidthInput.addEventListener("input", () => {
     const newWidth = parseInt(canvasWidthInput.value);
