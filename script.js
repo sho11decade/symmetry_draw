@@ -76,13 +76,21 @@ canvas.addEventListener("mousemove", () => {
     }
 });
 uploadButton.addEventListener("click", () => {
+    uploadCanvas();
+    console.log("upload");
 });
-uploadButton.addEventListener("touchend", () => {
+uploadButton.addEventListener("touchend", (e) => {
+    uploadCanvas();
+    console.log("upload");
 });
 
 downloadButton.addEventListener("click", () => {
+    console.log("download");
+    downloadCanvas();
 });
 downloadButton.addEventListener("touchend", () => {
+    console.log("download");
+    downloadCanvas();
 });
 canvasWidthInput.addEventListener("input", () => {
     const newWidth = parseInt(canvasWidthInput.value);
@@ -291,4 +299,33 @@ function redo() {
             ctx.drawImage(img, 0, 0);
         };
     }
+}
+
+function downloadCanvas() {
+    var nowtime = new Date();
+    var filename = "canvas_image_" + nowtime.getFullYear() + nowtime.getMonth() + nowtime.getDate() + nowtime.getHours() + nowtime.getMinutes() + nowtime.getSeconds() + ".png";
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = canvas.toDataURL();
+    link.click();
+}
+
+function uploadCanvas() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.src = e.target.result;
+            img.onload = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+            };
+        };
+        reader.readAsDataURL(file);
+    };
+    input.click();
 }
