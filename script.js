@@ -79,19 +79,12 @@ uploadButton.addEventListener("click", () => {
     uploadCanvas();
     console.log("upload");
 });
-uploadButton.addEventListener("touchend", (e) => {
-    uploadCanvas();
-    console.log("upload");
-});
 
 downloadButton.addEventListener("click", () => {
     console.log("download");
     downloadCanvas();
 });
-downloadButton.addEventListener("touchend", () => {
-    console.log("download");
-    downloadCanvas();
-});
+
 canvasWidthInput.addEventListener("input", () => {
     const newWidth = parseInt(canvasWidthInput.value);
     if (!isNaN(newWidth) && newWidth > 0) {
